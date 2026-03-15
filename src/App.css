@@ -1,0 +1,33 @@
+/* App-level reset — no max-width constraint on root */
+#root {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 1rem;
+  padding-top: 68px;
+}
+
+.not-found h1 {
+  font-size: 4rem;
+  margin: 0;
+  color: #009c3b;
+}
+
+.not-found p {
+  color: #666;
+  margin: 0;
+}
+
+.not-found a {
+  color: #009c3b;
+  font-weight: 700;
+}

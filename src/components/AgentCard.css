@@ -1,0 +1,199 @@
+.agent-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.agent-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.13);
+}
+
+/* Header */
+.agent-card__header {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.agent-card__photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 3px solid #e8f5e9;
+}
+
+.agent-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.agent-card__name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.agent-card__agency {
+  font-size: 0.82rem;
+  color: #009c3b;
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+
+.agent-card__creci {
+  font-size: 0.75rem;
+  color: #999;
+  margin: 0 0 6px;
+}
+
+.agent-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.agent-card__stars {
+  color: #f5a623;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.agent-card__rating-val {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.agent-card__review-count {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+/* Stats bar */
+.agent-card__stats {
+  display: flex;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-top: 1rem;
+}
+
+.agent-card__stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 0.5rem;
+  border-right: 1px solid #f0f0f0;
+}
+
+.agent-card__stat:last-child {
+  border-right: none;
+}
+
+.agent-card__stat-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #009c3b;
+}
+
+.agent-card__stat-label {
+  font-size: 0.7rem;
+  color: #888;
+  text-align: center;
+  margin-top: 2px;
+}
+
+/* Body */
+.agent-card__body {
+  padding: 0.9rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.agent-card__specialty,
+.agent-card__location,
+.agent-card__languages {
+  margin: 0;
+  font-size: 0.83rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.agent-card__specialty svg,
+.agent-card__location svg,
+.agent-card__languages svg {
+  width: 14px;
+  height: 14px;
+  fill: #009c3b;
+  flex-shrink: 0;
+}
+
+/* Actions */
+.agent-card__actions {
+  display: flex;
+  padding: 0 1.25rem 1.25rem;
+  gap: 0.6rem;
+}
+
+.agent-card__btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.agent-card__btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.agent-card__btn--call {
+  background: #009c3b;
+  color: #fff;
+  border: none;
+}
+
+.agent-card__btn--call svg {
+  fill: #fff;
+}
+
+.agent-card__btn--call:hover {
+  background: #007a2e;
+}
+
+.agent-card__btn--message {
+  background: #fff;
+  color: #009c3b;
+  border: 2px solid #009c3b;
+}
+
+.agent-card__btn--message svg {
+  fill: #009c3b;
+}
+
+.agent-card__btn--message:hover {
+  background: #f0fdf4;
+}

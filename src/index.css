@@ -1,0 +1,66 @@
+/* ── Global reset & base styles for Ache Hoje ──────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Brand colors */
+  --color-primary: #009c3b;
+  --color-primary-dark: #007a2e;
+  --color-primary-light: #e8f5e9;
+  --color-accent: #ffdf00;
+  --color-accent-dark: #c8a800;
+
+  /* Neutrals */
+  --color-text: #1a1a1a;
+  --color-text-muted: #666;
+  --color-border: #e0e0e0;
+  --color-bg: #f5f5f5;
+  --color-surface: #ffffff;
+
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+}
+
+body {
+  background: var(--color-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+

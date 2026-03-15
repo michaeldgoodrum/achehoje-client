@@ -1,0 +1,169 @@
+.searchbar {
+  background: #fff;
+  border-radius: 14px;
+  overflow: visible;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+  max-width: 700px;
+  width: 100%;
+}
+
+/* Tabs */
+.searchbar__tabs {
+  display: flex;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.searchbar__tab {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s, background 0.2s;
+  border-radius: 14px 14px 0 0;
+}
+
+.searchbar__tab:first-child {
+  border-radius: 14px 0 0 0;
+}
+
+.searchbar__tab:last-child {
+  border-radius: 0 14px 0 0;
+}
+
+.searchbar__tab:hover {
+  background: #f0fdf4;
+  color: #009c3b;
+}
+
+.searchbar__tab--active {
+  color: #009c3b !important;
+  background: #fff !important;
+  border-bottom: 3px solid #009c3b;
+  margin-bottom: -1px;
+}
+
+/* Form */
+.searchbar__form {
+  display: flex;
+  gap: 0;
+  padding: 1rem;
+  align-items: center;
+}
+
+.searchbar--compact .searchbar__form {
+  padding: 0.6rem;
+}
+
+.searchbar__input-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.searchbar__icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  fill: #009c3b;
+  pointer-events: none;
+}
+
+.searchbar__input {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.75rem;
+  border: 1.5px solid #e0e0e0;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.searchbar__input:focus {
+  border-color: #009c3b;
+}
+
+.searchbar__input::placeholder {
+  color: #aaa;
+}
+
+/* Autocomplete */
+.searchbar__suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem 0;
+  z-index: 200;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.searchbar__suggestions li {
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.15s;
+}
+
+.searchbar__suggestions li svg {
+  width: 16px;
+  height: 16px;
+  fill: #009c3b;
+  flex-shrink: 0;
+}
+
+.searchbar__suggestions li:hover {
+  background: #f0fdf4;
+}
+
+/* Button */
+.searchbar__btn {
+  background: #009c3b;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.searchbar__btn:hover {
+  background: #007a2e;
+}
+
+@media (max-width: 540px) {
+  .searchbar__form {
+    flex-direction: column;
+  }
+
+  .searchbar__input {
+    border-right: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+  }
+
+  .searchbar__btn {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+  }
+}
