@@ -5,6 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { fetchPropertyById } from "../api";
 import { formatCurrency, formatArea, formatDaysListed } from "../utils/format";
+import ImageCarousel from "../components/ImageCarousel";
 import "./PropertyDetail.css";
 
 // Fix leaflet default icons
@@ -102,9 +103,9 @@ export default function PropertyDetail() {
       <div className="detail__layout">
         {/* ── Left / main ── */}
         <div className="detail__main">
-          {/* Hero image */}
+          {/* Hero image carousel */}
           <div className="detail__image-wrap">
-            <img src={property.image} alt={property.title} className="detail__image" />
+            <ImageCarousel images={property.images} alt={property.title} />
             {property.isFeatured && (
               <span className="detail__badge detail__badge--featured">Destaque</span>
             )}

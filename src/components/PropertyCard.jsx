@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { formatCurrency, formatArea, formatDaysListed } from "../utils/format";
+import ImageCarousel from "./ImageCarousel";
 import "./PropertyCard.css";
 
 export default function PropertyCard({
@@ -22,7 +23,7 @@ export default function PropertyCard({
     bathrooms,
     area,
     parkingSpots,
-    image,
+    images,
     isFeatured,
     listedDays,
   } = property;
@@ -37,12 +38,7 @@ export default function PropertyCard({
       onMouseLeave={onMouseLeave}
     >
       <div className="property-card__image-wrap">
-        <img
-          src={image}
-          alt={title}
-          className="property-card__image"
-          loading="lazy"
-        />
+        <ImageCarousel images={images} alt={title} compact />
         {isFeatured && (
           <span className="property-card__badge property-card__badge--featured">
             Destaque

@@ -74,7 +74,7 @@ export default function PropertyMap({ properties, activeId, onPinClick }) {
           >
             <Popup>
               <div className="map-popup">
-                <img src={p.image} alt={p.title} />
+                <img src={p.images?.[0]} alt={p.title} />
                 <strong>{p.title}</strong>
                 <span>{formatCurrency(p.price)}</span>
                 <small>{p.neighborhood}, {p.city}</small>
