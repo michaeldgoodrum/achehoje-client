@@ -6,6 +6,7 @@ import {
   propertiesForRent,
   agents,
 } from "../data/properties";
+import { fuzzyMatchCity } from "../utils/format";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "";
 
@@ -27,9 +28,7 @@ export const fetchPropertiesForSale = async (filters = {}) => {
   let results = [...propertiesForSale];
 
   if (filters.city) {
-    results = results.filter((p) =>
-      p.city.toLowerCase().includes(filters.city.toLowerCase())
-    );
+    results = results.filter((p) => fuzzyMatchCity(filters.city, p.city, p.state));
   }
   if (filters.minPrice) {
     results = results.filter((p) => p.price >= Number(filters.minPrice));
@@ -61,9 +60,7 @@ export const fetchPropertiesForRent = async (filters = {}) => {
   let results = [...propertiesForRent];
 
   if (filters.city) {
-    results = results.filter((p) =>
-      p.city.toLowerCase().includes(filters.city.toLowerCase())
-    );
+    results = results.filter((p) => fuzzyMatchCity(filters.city, p.city, p.state));
   }
   if (filters.minPrice) {
     results = results.filter((p) => p.price >= Number(filters.minPrice));
