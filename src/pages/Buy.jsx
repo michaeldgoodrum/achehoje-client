@@ -61,6 +61,7 @@ export default function Buy() {
             properties={properties}
             activeId={activeId}
             onPinClick={setActiveId}
+            listingType="sale"
           />
         </div>
 

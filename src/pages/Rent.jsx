@@ -59,6 +59,7 @@ export default function Rent() {
             properties={properties}
             activeId={activeId}
             onPinClick={setActiveId}
+            listingType="rent"
           />
         </div>
 

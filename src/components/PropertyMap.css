@@ -62,6 +62,7 @@
   flex-direction: column;
   gap: 0.3rem;
   min-width: 180px;
+  text-decoration: none;
 }
 
 .map-popup img {
@@ -86,4 +87,12 @@
 .map-popup small {
   font-size: 0.75rem;
   color: #777;
+}
+
+.map-popup em {
+  font-style: normal;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #009c3b;
+  margin-top: 0.2rem;
 }

@@ -49,8 +49,9 @@ function FitBounds({ properties }) {
   return null;
 }
 
-export default function PropertyMap({ properties, activeId, onPinClick }) {
+export default function PropertyMap({ properties, activeId, onPinClick, listingType = "sale" }) {
   const withCoords = properties.filter((p) => p.lat && p.lng);
+  const typeSlug = listingType === "rent" ? "aluguel" : "venda";
 
   return (
     <div className="property-map">
@@ -73,12 +74,13 @@ export default function PropertyMap({ properties, activeId, onPinClick }) {
             eventHandlers={{ click: () => onPinClick?.(p.id) }}
           >
             <Popup>
-              <div className="map-popup">
+              <a className="map-popup" href={`/imovel/${typeSlug}/${p.id}`}>
                 <img src={p.images?.[0]} alt={p.title} />
                 <strong>{p.title}</strong>
                 <span>{formatCurrency(p.price)}</span>
                 <small>{p.neighborhood}, {p.city}</small>
-              </div>
+                <em>Ver imóvel →</em>
+              </a>
             </Popup>
           </Marker>
         ))}
