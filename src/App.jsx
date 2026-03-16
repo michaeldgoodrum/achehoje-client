@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Buy from "./pages/Buy";
 import Rent from "./pages/Rent";
 import FindAgent from "./pages/FindAgent";
+import PropertyDetail from "./pages/PropertyDetail";
 import "./App.css";
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/comprar" element={<Buy />} />
         <Route path="/alugar" element={<Rent />} />
         <Route path="/corretores" element={<FindAgent />} />
+        <Route path="/imovel/:listingType/:id" element={<PropertyDetail />} />
         <Route
           path="*"
           element={

@@ -1,8 +1,16 @@
+import { Link } from "react-router-dom";
 import { formatCurrency, formatArea, formatDaysListed } from "../utils/format";
 import "./PropertyCard.css";
 
-export default function PropertyCard({ property, listingType = "sale" }) {
+export default function PropertyCard({
+  property,
+  listingType = "sale",
+  highlighted,
+  onMouseEnter,
+  onMouseLeave,
+}) {
   const {
+    id,
     type,
     title,
     price,
@@ -19,8 +27,15 @@ export default function PropertyCard({ property, listingType = "sale" }) {
     listedDays,
   } = property;
 
+  const href = `/imovel/${listingType === "rent" ? "aluguel" : "venda"}/${id}`;
+
   return (
-    <div className="property-card">
+    <Link
+      to={href}
+      className={`property-card${highlighted ? " property-card--highlighted" : ""}`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <div className="property-card__image-wrap">
         <img
           src={image}
@@ -76,6 +91,6 @@ export default function PropertyCard({ property, listingType = "sale" }) {
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
