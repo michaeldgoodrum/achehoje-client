@@ -1,0 +1,89 @@
+.property-map {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+/* Price-label pins */
+.map-pin {
+  display: inline-flex;
+  align-items: center;
+  background: #fff;
+  color: #1a1a1a;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: Inter, sans-serif;
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+  white-space: nowrap;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
+  transform: translate(-50%, -100%);
+}
+
+.map-pin::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #fff;
+}
+
+.map-pin:hover {
+  background: #009c3b;
+  color: #fff;
+  transform: translate(-50%, -100%) scale(1.08);
+}
+
+.map-pin:hover::after {
+  border-top-color: #009c3b;
+}
+
+.map-pin--active {
+  background: #009c3b;
+  color: #fff;
+  border-color: #007a2e;
+  transform: translate(-50%, -100%) scale(1.1);
+  z-index: 1000 !important;
+}
+
+.map-pin--active::after {
+  border-top-color: #009c3b;
+}
+
+/* Popup */
+.map-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 180px;
+}
+
+.map-popup img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.map-popup strong {
+  font-size: 0.85rem;
+  line-height: 1.3;
+  color: #1a1a1a;
+}
+
+.map-popup span {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #009c3b;
+}
+
+.map-popup small {
+  font-size: 0.75rem;
+  color: #777;
+}

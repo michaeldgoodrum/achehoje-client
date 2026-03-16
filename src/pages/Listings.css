@@ -9,7 +9,7 @@
 /* Hero banner */
 .listings-page__hero {
   background: linear-gradient(135deg, #005c24 0%, #009c3b 100%);
-  padding: 2.5rem 1.5rem;
+  padding: 1.25rem 1.5rem;
 }
 
 .listings-page__hero--rent {
@@ -19,22 +19,51 @@
 .listings-page__hero-inner {
   max-width: 860px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.listings-page__hero-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .listings-page__title {
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.35rem;
   font-weight: 900;
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.1rem;
 }
 
 .listings-page__subtitle {
   color: rgba(255, 255, 255, 0.8);
-  font-size: 0.95rem;
-  margin: 0 0 1.25rem;
+  font-size: 0.85rem;
+  margin: 0;
 }
 
-/* Content area */
+/* Split layout: map left, cards right */
+.listings-page__split {
+  display: flex;
+  height: calc(100vh - 68px - 56px); /* subtract navbar + filter bar */
+}
+
+.listings-page__map-col {
+  position: sticky;
+  top: calc(68px + 56px);
+  flex: 0 0 44%;
+  height: calc(100vh - 68px - 56px);
+  overflow: hidden;
+}
+
+.listings-page__cards-col {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+/* Content area (kept for non-split usage) */
 .listings-page__content {
   padding: 2rem 0 4rem;
 }
@@ -85,8 +114,8 @@
 /* Grid */
 .listings-page__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
 }
 
 /* Loading state */
@@ -156,6 +185,26 @@
 
 .listings-page__reset-btn:hover {
   background: #007a2e;
+}
+
+@media (max-width: 860px) {
+  .listings-page__split {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .listings-page__map-col {
+    position: relative;
+    top: 0;
+    flex: none;
+    width: 100%;
+    height: 45vh;
+  }
+
+  .listings-page__cards-col {
+    overflow-y: visible;
+    padding: 1rem;
+  }
 }
 
 @media (max-width: 560px) {

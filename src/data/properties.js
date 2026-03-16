@@ -19,6 +19,8 @@ export const propertiesForSale = [
     features: ["Varanda", "Academia", "Piscina"],
     isFeatured: true,
     listedDays: 5,
+    lat: -22.9714,
+    lng: -43.1822,
   },
   {
     id: 2,
@@ -37,6 +39,8 @@ export const propertiesForSale = [
     features: ["Piscina", "Churrasqueira", "Jardim"],
     isFeatured: true,
     listedDays: 12,
+    lat: -23.5157,
+    lng: -46.8524,
   },
   {
     id: 3,
@@ -55,6 +59,8 @@ export const propertiesForSale = [
     features: ["Terraço", "Piscina privativa", "Sauna"],
     isFeatured: true,
     listedDays: 3,
+    lat: -23.5617,
+    lng: -46.6664,
   },
   {
     id: 4,
@@ -73,6 +79,8 @@ export const propertiesForSale = [
     features: ["Escritura registrada", "Topografia plana"],
     isFeatured: false,
     listedDays: 20,
+    lat: -23.4050,
+    lng: -46.6269,
   },
   {
     id: 5,
@@ -91,6 +99,8 @@ export const propertiesForSale = [
     features: ["Acesso à praia", "Varanda gourmet", "Piscina"],
     isFeatured: true,
     listedDays: 8,
+    lat: -27.4380,
+    lng: -48.5010,
   },
   {
     id: 6,
@@ -109,6 +119,8 @@ export const propertiesForSale = [
     features: ["Próximo ao metrô", "Portaria 24h", "Academia"],
     isFeatured: false,
     listedDays: 15,
+    lat: -23.5548,
+    lng: -46.6527,
   },
   {
     id: 7,
@@ -127,6 +139,8 @@ export const propertiesForSale = [
     features: ["Reformado", "Varanda", "Vista para o mar"],
     isFeatured: false,
     listedDays: 2,
+    lat: -22.9845,
+    lng: -43.2248,
   },
   {
     id: 8,
@@ -145,6 +159,8 @@ export const propertiesForSale = [
     features: ["Arquitetura colonial", "Quintal", "Área gourmet"],
     isFeatured: false,
     listedDays: 30,
+    lat: -12.9778,
+    lng: -38.5016,
   },
 ];
 
@@ -166,6 +182,8 @@ export const propertiesForRent = [
     features: ["Varanda", "Academia", "Piscina"],
     isFeatured: true,
     listedDays: 4,
+    lat: -23.5629,
+    lng: -46.6872,
   },
   {
     id: 102,
@@ -184,6 +202,8 @@ export const propertiesForRent = [
     features: ["Churrasqueira", "Piscina", "Jardim"],
     isFeatured: true,
     listedDays: 7,
+    lat: -23.6228,
+    lng: -46.7249,
   },
   {
     id: 103,
@@ -202,6 +222,8 @@ export const propertiesForRent = [
     features: ["Mobiliado", "Internet inclusa", "Lavanderia coletiva"],
     isFeatured: false,
     listedDays: 1,
+    lat: -22.8627,
+    lng: -43.2255,
   },
   {
     id: 104,
@@ -220,6 +242,8 @@ export const propertiesForRent = [
     features: ["Café da manhã", "Limpeza diária", "Concierge"],
     isFeatured: true,
     listedDays: 10,
+    lat: -23.5601,
+    lng: -46.6561,
   },
   {
     id: 105,
@@ -238,6 +262,8 @@ export const propertiesForRent = [
     features: ["Suítes", "Área de serviço", "Quintal"],
     isFeatured: false,
     listedDays: 18,
+    lat: -23.5978,
+    lng: -46.6392,
   },
   {
     id: 106,
@@ -256,6 +282,8 @@ export const propertiesForRent = [
     features: ["Vista para o mar", "Piscina", "Portaria 24h"],
     isFeatured: true,
     listedDays: 6,
+    lat: -3.7319,
+    lng: -38.5267,
   },
   {
     id: 107,
@@ -274,6 +302,8 @@ export const propertiesForRent = [
     features: ["Pé-direito alto", "Estilo industrial", "Metrô próximo"],
     isFeatured: false,
     listedDays: 9,
+    lat: -22.9258,
+    lng: -43.1794,
   },
   {
     id: 108,
@@ -292,6 +322,8 @@ export const propertiesForRent = [
     features: ["Piscina", "Próximo às praias", "Área gourmet"],
     isFeatured: false,
     listedDays: 14,
+    lat: -22.7469,
+    lng: -41.8818,
   },
 ];
 

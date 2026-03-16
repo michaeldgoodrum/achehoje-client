@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import PropertyCard from "../components/PropertyCard";
 import FilterBar from "../components/FilterBar";
 import SearchBar from "../components/SearchBar";
+import PropertyMap from "../components/PropertyMap";
 import { fetchPropertiesForSale } from "../api";
 import "./Listings.css";
 
@@ -10,6 +11,7 @@ export default function Buy() {
   const [searchParams] = useSearchParams();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeId, setActiveId] = useState(null);
   const [filters, setFilters] = useState({
     city: searchParams.get("cidade") || "",
   });
@@ -39,19 +41,31 @@ export default function Buy() {
       {/* Search header */}
       <div className="listings-page__hero">
         <div className="listings-page__hero-inner">
-          <h1 className="listings-page__title">Imóveis à Venda</h1>
-          <p className="listings-page__subtitle">
-            {loading ? "Buscando imóveis..." : `${properties.length} imóveis encontrados`}
-            {filters.city && ` em ${filters.city}`}
-          </p>
+          <div className="listings-page__hero-text">
+            <h1 className="listings-page__title">Imóveis à Venda</h1>
+            <p className="listings-page__subtitle">
+              {loading ? "Buscando imóveis..." : `${properties.length} imóveis disponíveis`}
+              {filters.city && ` em ${filters.city}`}
+            </p>
+          </div>
           <SearchBar defaultTab="comprar" compact />
         </div>
       </div>
 
       <FilterBar filters={filters} onChange={setFilters} />
 
-      <div className="listings-page__content">
-        <div className="listings-page__inner">
+      <div className="listings-page__split">
+        {/* Left: map */}
+        <div className="listings-page__map-col">
+          <PropertyMap
+            properties={properties}
+            activeId={activeId}
+            onPinClick={setActiveId}
+          />
+        </div>
+
+        {/* Right: cards */}
+        <div className="listings-page__cards-col">
           {loading ? (
             <div className="listings-page__loading">
               <div className="listings-page__spinner" />
@@ -70,7 +84,7 @@ export default function Buy() {
             <>
               <div className="listings-page__results-header">
                 <p className="listings-page__count">
-                  <strong>{properties.length}</strong> imóveis encontrados
+                  <strong>{properties.length}</strong> imóveis disponíveis
                   {filters.city && ` em ${filters.city}`}
                 </p>
                 <select className="listings-page__sort">
@@ -82,7 +96,14 @@ export default function Buy() {
               </div>
               <div className="listings-page__grid">
                 {properties.map((p) => (
-                  <PropertyCard key={p.id} property={p} listingType="sale" />
+                  <PropertyCard
+                    key={p.id}
+                    property={p}
+                    listingType="sale"
+                    highlighted={p.id === activeId}
+                    onMouseEnter={() => setActiveId(p.id)}
+                    onMouseLeave={() => setActiveId(null)}
+                  />
                 ))}
               </div>
             </>
