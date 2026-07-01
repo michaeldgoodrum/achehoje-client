@@ -23,23 +23,26 @@ if ! docker compose version >/dev/null 2>&1; then
   chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 fi
 
-# Buildx plugin — required to build images ("compose build requires buildx").
-# Amazon Linux 2023's docker package doesn't ship it. Note: buildx assets use
+# Buildx plugin — required to build images ("compose build requires buildx
+# 0.17.0 or later"). Amazon Linux 2023's docker package ships a buildx that's
+# too old, so a presence check ("docker buildx version") isn't enough — it
+# succeeds but fails the compose version floor. Always install a current one.
+# /usr/local/lib/docker/cli-plugins takes precedence over the packaged
+# /usr/lib/docker/cli-plugins, so ours wins. Note: buildx release assets use
 # arm64/amd64 naming (not aarch64/x86_64) and carry the version in the filename,
 # so we can't reuse the compose download trick.
-if ! docker buildx version >/dev/null 2>&1; then
-  case "$(uname -m)" in
-    aarch64) BUILDX_ARCH=arm64 ;;
-    x86_64)  BUILDX_ARCH=amd64 ;;
-    *) echo "unsupported arch for buildx: $(uname -m)" >&2; exit 1 ;;
-  esac
-  BUILDX_VERSION=v0.19.3
-  mkdir -p /usr/local/lib/docker/cli-plugins
-  curl -fsSL \
-    "https://github.com/docker/buildx/releases/download/${BUILDX_VERSION}/buildx-${BUILDX_VERSION}.linux-${BUILDX_ARCH}" \
-    -o /usr/local/lib/docker/cli-plugins/docker-buildx
-  chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
-fi
+case "$(uname -m)" in
+  aarch64) BUILDX_ARCH=arm64 ;;
+  x86_64)  BUILDX_ARCH=amd64 ;;
+  *) echo "unsupported arch for buildx: $(uname -m)" >&2; exit 1 ;;
+esac
+BUILDX_VERSION=v0.19.3
+mkdir -p /usr/local/lib/docker/cli-plugins
+curl -fsSL \
+  "https://github.com/docker/buildx/releases/download/${BUILDX_VERSION}/buildx-${BUILDX_VERSION}.linux-${BUILDX_ARCH}" \
+  -o /usr/local/lib/docker/cli-plugins/docker-buildx
+chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
+docker buildx version   # log the resolved version so the boot log confirms the fix
 
 # Build and start the stack. Runs from the repo root regardless of where the
 # script was invoked from.
