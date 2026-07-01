@@ -1,0 +1,111 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  Ache Hoje — single-instance deployment. A Graviton t4g.micro running the full
+  Docker Compose stack (MongoDB + Express API + nginx + Caddy) behind one public
+  URL, with automatic HTTPS via Caddy when a domain is set. Cost-efficient:
+  free-tier eligible, ~$5-6/mo after.
+
+Parameters:
+  RepoUrl:
+    Type: String
+    Description: Git URL of this repository (must be reachable from the instance, e.g. a public GitHub URL).
+  InstanceType:
+    Type: String
+    Default: t4g.micro
+    Description: Graviton (arm64) instance type. t4g.micro is the cheapest and free-tier eligible in most regions.
+    AllowedValues: [t4g.nano, t4g.micro, t4g.small]
+  SshCidr:
+    Type: String
+    Default: 0.0.0.0/0
+    Description: CIDR allowed to SSH (port 22). Strongly recommended to set this to YOUR_IP/32.
+  KeyName:
+    Type: String
+    Default: ""
+    Description: (Optional) EC2 key pair name for SSH access. Leave blank to skip SSH.
+  DomainName:
+    Type: String
+    Default: ""
+    Description: >
+      (Optional) Domain for automatic HTTPS via Caddy/Let's Encrypt, e.g.
+      app.example.com. Point an A record at the stack's Elastic IP (Caddy retries
+      until DNS resolves). Leave blank to serve plain HTTP on port 80.
+  LatestAmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-arm64
+    Description: Latest Amazon Linux 2023 arm64 AMI (resolved automatically; matches the t4g instance family).
+
+Conditions:
+  HasKeyName: !Not [!Equals [!Ref KeyName, ""]]
+  HasDomain: !Not [!Equals [!Ref DomainName, ""]]
+
+Resources:
+  WebSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Ache Hoje web (80/443) and SSH (22)
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+          Description: HTTP
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+          Description: HTTPS (Caddy automatic TLS)
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref SshCidr
+          Description: SSH
+
+  Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: !Ref LatestAmiId
+      KeyName: !If [HasKeyName, !Ref KeyName, !Ref "AWS::NoValue"]
+      SecurityGroupIds:
+        - !Ref WebSecurityGroup
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeSize: 20
+            VolumeType: gp3
+            DeleteOnTermination: true
+      Tags:
+        - Key: Name
+          Value: achehoje
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          set -euxo pipefail
+          dnf install -y git
+          cd /opt
+          git clone ${RepoUrl} app
+          # Enable automatic HTTPS when a domain was provided (Caddy reads this).
+          if [ -n "${DomainName}" ]; then
+            echo "SITE_ADDRESS=${DomainName}" > /opt/app/deploy/.env
+          fi
+          bash /opt/app/deploy/bootstrap.sh
+
+  ElasticIp:
+    Type: AWS::EC2::EIP
+    Properties:
+      InstanceId: !Ref Instance
+
+Outputs:
+  Url:
+    Description: Public URL for the app
+    Value: !If
+      - HasDomain
+      - !Sub "https://${DomainName}"
+      - !Sub "http://${ElasticIp}"
+  PublicIp:
+    Description: Elastic IP — point your domain's A record here for HTTPS
+    Value: !Ref ElasticIp
+  SshCommand:
+    Condition: HasKeyName
+    Description: SSH command (uses ec2-user on Amazon Linux)
+    Value: !Sub "ssh ec2-user@${ElasticIp}"

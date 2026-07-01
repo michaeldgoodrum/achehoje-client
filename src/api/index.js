@@ -10,13 +10,18 @@ import { fuzzyMatchCity } from "../utils/format";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "";
 
+// Use the live API when a base URL is configured, or in any production build
+// (served same-origin behind nginx at /api, so BASE_URL can stay empty). Dev
+// builds with no VITE_API_URL fall back to the in-memory placeholder data.
+const USE_API = Boolean(BASE_URL) || import.meta.env.PROD;
+
 // ── Simulates network delay during development ──────────────────────────────
 const fakeDelay = (ms = 300) => new Promise((res) => setTimeout(res, ms));
 
 // ── Properties ───────────────────────────────────────────────────────────────
 
 export const fetchPropertiesForSale = async (filters = {}) => {
-  if (BASE_URL) {
+  if (USE_API) {
     const params = new URLSearchParams(filters);
     const res = await fetch(`${BASE_URL}/api/properties/sale?${params}`);
     if (!res.ok) throw new Error("Erro ao buscar imóveis à venda");
@@ -49,7 +54,7 @@ export const fetchPropertiesForSale = async (filters = {}) => {
 };
 
 export const fetchPropertiesForRent = async (filters = {}) => {
-  if (BASE_URL) {
+  if (USE_API) {
     const params = new URLSearchParams(filters);
     const res = await fetch(`${BASE_URL}/api/properties/rent?${params}`);
     if (!res.ok) throw new Error("Erro ao buscar imóveis para alugar");
@@ -81,7 +86,7 @@ export const fetchPropertiesForRent = async (filters = {}) => {
 };
 
 export const fetchPropertyById = async (id, listingType = "sale") => {
-  if (BASE_URL) {
+  if (USE_API) {
     const res = await fetch(`${BASE_URL}/api/properties/${id}?type=${listingType}`);
     if (!res.ok) throw new Error("Imóvel não encontrado");
     return res.json();
@@ -96,7 +101,7 @@ export const fetchPropertyById = async (id, listingType = "sale") => {
 // ── Agents ───────────────────────────────────────────────────────────────────
 
 export const fetchAgents = async (filters = {}) => {
-  if (BASE_URL) {
+  if (USE_API) {
     const params = new URLSearchParams(filters);
     const res = await fetch(`${BASE_URL}/api/agents?${params}`);
     if (!res.ok) throw new Error("Erro ao buscar corretores");
@@ -121,7 +126,7 @@ export const fetchAgents = async (filters = {}) => {
 };
 
 export const fetchAgentById = async (id) => {
-  if (BASE_URL) {
+  if (USE_API) {
     const res = await fetch(`${BASE_URL}/api/agents/${id}`);
     if (!res.ok) throw new Error("Corretor não encontrado");
     return res.json();

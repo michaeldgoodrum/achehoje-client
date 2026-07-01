@@ -1,0 +1,10 @@
+# SITE_ADDRESS comes from the environment (see deploy/.env / .env.example):
+#   - a domain (app.example.com) → Caddy auto-provisions a Let's Encrypt cert,
+#     renews it, and redirects http→https automatically.
+#   - unset → defaults to :80 (plain HTTP, for an IP-only demo).
+{$SITE_ADDRESS::80} {
+	encode zstd gzip
+	# Forward everything to the nginx web tier, which serves the frontend and
+	# proxies /api to the API.
+	reverse_proxy web:80
+}
