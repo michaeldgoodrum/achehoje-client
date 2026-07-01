@@ -5,6 +5,9 @@ import { connectDB } from "./db.js";
 import { Property } from "./models/Property.js";
 import { Agent } from "./models/Agent.js";
 import { properties, agents } from "./data/seedData.js";
+import { londrinaProperties } from "./data/londrinaSeedData.js";
+
+const allProperties = [...properties, ...londrinaProperties];
 
 // Wipes and repopulates the database from the seed data. Run with `npm run seed`
 // (or automatically on first container start via docker-compose).
@@ -15,11 +18,11 @@ const seed = async () => {
 
   // Use .create() (not insertMany) so the Property pre-save hook runs and
   // populates searchText for each document.
-  await Property.create(properties);
+  await Property.create(allProperties);
   await Agent.create(agents);
 
   console.log(
-    `🌱 Seeded ${properties.length} properties and ${agents.length} agents.`
+    `🌱 Seeded ${allProperties.length} properties and ${agents.length} agents.`
   );
 
   await mongoose.disconnect();
