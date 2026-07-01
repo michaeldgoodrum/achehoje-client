@@ -29,8 +29,9 @@ achehoje-client/
 │   │   ├── db.js          # Mongoose connection
 │   │   ├── models/        # Property, Agent schemas
 │   │   ├── routes/        # /api/properties, /api/agents
-│   │   ├── data/seedData.js  # Standalone seed data (generated from src/data)
-│   │   └── seed.js        # Wipe + repopulate the database
+│   │   ├── data/seedData.js         # Base seed data (generated from src/data)
+│   │   ├── data/londrinaSeedData.js  # Londrina, PR listings (merged into the seed)
+│   │   └── seed.js        # Wipe + repopulate the database (base + Londrina)
 │   ├── test/              # node:test + supertest + in-memory MongoDB
 │   └── Dockerfile
 │
